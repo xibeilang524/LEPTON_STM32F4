@@ -1,0 +1,75 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.18a
+Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Shawn Microsoft, Microsoft, LIC=WHY74-FKHE7-EH88P-M81KC-5RI7S-FIXYV
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Standard  Version: 5.18a
+Toolchain Path:  E:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 1 (build 61)
+Assembler:       Armasm.exe V5.06 update 1 (build 61)
+Linker/Locator:  ArmLink.exe V5.06 update 1 (build 61)
+Library Manager: ArmAr.exe V5.06 update 1 (build 61)
+Hex Converter:   FromElf.exe V5.06 update 1 (build 61)
+CPU DLL:         SARMCM3.DLL V5.18a
+Dialog DLL:      DCM.DLL V1.13.6.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
+Dialog DLL:      TCM.DLL V1.14.8.0
+ 
+<h2>Project:</h2>
+G:\KWT\lepton-new\lepton-new\MDK-ARM\lepton-new.uvprojx
+Project File Date:  05/28/2016
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 1 (build 61)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'lepton-new'
+compiling LEPTON_DRIVER.c...
+..\lepton\Src\LEPTON_DRIVER.c(19): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	X = (uint16_t)(Y+0.5);
+..\lepton\Src\LEPTON_DRIVER.c(81): warning:  #177-D: variable "X" was declared but never referenced
+  	uint8_t i,X,Y;
+..\lepton\Src\LEPTON_DRIVER.c(81): warning:  #177-D: variable "Y" was declared but never referenced
+  	uint8_t i,X,Y;
+..\lepton\Src\LEPTON_DRIVER.c(85): warning:  #177-D: variable "Mx" was declared but never referenced
+  	uint16_t Mx,Mn;
+..\lepton\Src\LEPTON_DRIVER.c(85): warning:  #177-D: variable "Mn" was declared but never referenced
+  	uint16_t Mx,Mn;
+..\lepton\Src\LEPTON_DRIVER.c(86): warning:  #177-D: variable "IMG" was declared but never referenced
+  	uint16_t IMG[60][VOSPI_FRAME_SIZE/2];
+..\lepton\Src\LEPTON_DRIVER.c(90): warning:  #177-D: variable "last_frame_number" was declared but never referenced
+  	int last_frame_number;
+..\lepton\Src\LEPTON_DRIVER.c(91): warning:  #177-D: variable "start_image" was declared but never referenced
+  	int start_image = 0;
+..\lepton\Src\LEPTON_DRIVER.c(94): warning:  #550-D: variable "new_frame" was set but never used
+  	int new_frame = 0;
+..\lepton\Src\LEPTON_DRIVER.c(95): warning:  #177-D: variable "frame_counter" was declared but never referenced
+  	int frame_counter = 0;
+..\lepton\Src\LEPTON_DRIVER.c: 10 warnings, 0 errors
+linking...
+Program Size: Code=15020 RO-data=952 RW-data=28 ZI-data=14556  
+"lepton-new\lepton-new.axf" - 0 Error(s), 10 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.5.0.pack
+                ARM::CMSIS:CORE:4.3.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 4.3.0
+
+<h2>Collection of Component include folders:</h2>
+  G:\KWT\lepton-new\lepton-new\MDK-ARM\RTE
+  E:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include
+  E:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:4.3.0
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

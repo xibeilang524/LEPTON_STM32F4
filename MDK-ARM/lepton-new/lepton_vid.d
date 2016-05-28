@@ -1,0 +1,10 @@
+lepton-new\lepton_vid.o: ..\lepton_sdk\Src\LEPTON_VID.c
+lepton-new\lepton_vid.o: ..\lepton_sdk\Inc\LEPTON_SDK.h
+lepton-new\lepton_vid.o: ..\lepton_sdk\Inc\LEPTON_Types.h
+lepton-new\lepton_vid.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+lepton-new\lepton_vid.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+lepton-new\lepton_vid.o: ..\lepton_sdk\Inc\LEPTON_ErrorCodes.h
+lepton-new\lepton_vid.o: ..\lepton_sdk\Inc\LEPTON_SDKConfig.h
+lepton-new\lepton_vid.o: ..\lepton_sdk\Inc\LEPTON_I2C_Protocol.h
+lepton-new\lepton_vid.o: ..\lepton_sdk\Inc\LEPTON_I2C_Service.h
+lepton-new\lepton_vid.o: ..\lepton_sdk\Inc\LEPTON_VID.h
