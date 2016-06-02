@@ -31,6 +31,8 @@ lepton-new\img_process.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_
 lepton-new\img_process.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 lepton-new\img_process.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 lepton-new\img_process.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+lepton-new\img_process.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+lepton-new\img_process.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lepton-new\img_process.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 lepton-new\img_process.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 lepton-new\img_process.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

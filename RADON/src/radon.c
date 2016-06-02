@@ -88,42 +88,42 @@ void radon(float *pPtr, float *iPtr, const uint8_t *thetaPtr, int M, int N, int 
 	free((void *)ySinTable);
 }
 
-POINT* max(unsigned char str[][181])
-{
-	POINT max[2] = {0,0,-100000000L };
-	unsigned int i, j;
-	for (i = 0; i < 103; i++)
-	{
-		for (j = 0; j < 91; j++)
-		{
-			if (str[i][j] > max[0].value)
-			{
-				max[0].value = str[i][j];
-				max[0].x = j;
-				max[0].y = i;
-			}
-		}
-		for (j = 91; j < 181; j++)
-		{
-			if (str[i][j] > max[1].value)
-			{
-				max[1].value = str[i][j];
-				max[1].x = j - 90;
-				max[1].y = i;
-			}
-		}
-	}
-	return max;
-}
+//POINT* max(unsigned char str[][46])
+//{
+//	POINT max[2] = {0,0,-100000000L };
+//	unsigned int i, j;
+//	for (i = 0; i < 103; i++)
+//	{
+//		for (j = 0; j < 22; j++)
+//		{
+//			if (str[i][j] > max[0].value)
+//			{
+//				max[0].value = str[i][j];
+//				max[0].x = j;
+//				max[0].y = i;
+//			}
+//		}
+//		for (j = 22; j < 46; j++)
+//		{
+//			if (str[i][j] > max[1].value)
+//			{
+//				max[1].value = str[i][j];
+//				max[1].x = j - 90;
+//				max[1].y = i;
+//			}
+//		}
+//	}
+//	return max;
+//}
 
-LINE* radonLine(float str[103*181])
+LINE* radonLine(float str[103*46])
 {
 
 	float pi = 3.14;
 	LINE line[2];
 	uint8_t i, j;
 	float max = 0;
-	for (i = 0; i < 91; i++)
+	for (i = 0; i < 22; i++)
 	{
 		for (j = 0; j < 103; j++)
 		{
@@ -131,13 +131,13 @@ LINE* radonLine(float str[103*181])
 			{
 				max = str[i * 103 + j];
 				line[0].maxValue = max;
-				line[0].max_point_x = i;
+				line[0].max_point_x = 4*i;
 				line[0].max_point_y = j;
 			}
 		}
 	}
 	max = 0;
-	for (i = 91; i < 181; i++)
+	for (i = 22; i < 46; i++)
 	{
 		for (j = 0; j < 103; j++)
 		{
@@ -145,7 +145,7 @@ LINE* radonLine(float str[103*181])
 			{
 				max = str[i * 103 + j];
 				line[1].maxValue = max;
-				line[1].max_point_x = i - 90;
+				line[1].max_point_x = 4*i - 90;
 				line[1].max_point_y = j;
 			}
 		}

@@ -30,4 +30,6 @@ lepton-new\stm32f4xx_hal_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_h
 lepton-new\stm32f4xx_hal_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 lepton-new\stm32f4xx_hal_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 lepton-new\stm32f4xx_hal_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+lepton-new\stm32f4xx_hal_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+lepton-new\stm32f4xx_hal_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lepton-new\stm32f4xx_hal_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h

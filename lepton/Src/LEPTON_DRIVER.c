@@ -3,9 +3,11 @@
 #include "TL1771_Driver.h"
 #include "img_process.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 extern uint16_t rawIMG[60][80];
 extern SPI_HandleTypeDef hspi1;
+uint16_t IMG[60][VOSPI_FRAME_SIZE/2];
 
 uint16_t RGB565(uint8_t R,uint8_t G,uint8_t B) {
 	return ((R >> 3) << 11) | ((G >> 2) << 5) | (B >> 3);
@@ -26,22 +28,17 @@ void Frametransfer(void){
 	uint8_t frame_number;
 	uint8_t lost_frame_counter = 0;
 	uint8_t frame_complete = 0;
-	uint16_t Mx,Mn;
-	uint16_t IMG[60][VOSPI_FRAME_SIZE/2];
-	uint8_t FrmPackt[VOSPI_FRAME_SIZE];
-
-	Mn = 0xffff;
-	Mx = 0;
-
+	uint8_t *FrmPackt;
+	
+	FrmPackt = (uint8_t *)calloc(VOSPI_FRAME_SIZE,sizeof(uint8_t));
+	
 	while(!frame_complete){
 		
-		HAL_SPI_Receive(&hspi1,FrmPackt,VOSPI_FRAME_SIZE,200);
+		HAL_SPI_Receive(&hspi1,FrmPackt,VOSPI_FRAME_SIZE,20);
 	
-		if((FrmPackt[0]&0x0f) != 0x0f){			//校验是否为同步帧
-			frame_number = FrmPackt[1];
+		if((FrmPackt[1]&0xf) != 0x0f){			//校验是否为同步帧
+			frame_number = FrmPackt[0];
 
-			//printf("frame_number:%d\r\n",frame_number);
-			
 			if(frame_number < 60 ){
 				lost_frame_counter = 0;
 					for(i=0;i<82;i++){
@@ -49,11 +46,6 @@ void Frametransfer(void){
 							IMG[frame_number][i] = frame_number;
 						}else{
 							IMG[frame_number][i] = (FrmPackt[2*i] << 8 | FrmPackt[2*i+1]);
-							rawIMG [frame_number][i] = (lepton_frame_packet[2*i+4] << 8 | lepton_frame_packet[2*i+5]);
-							if(i>1){
-								  Mx = (IMG[frame_number][i]>Mx ? IMG[frame_number][i] : Mx);
-								  Mn = (IMG[frame_number][i]<Mn ? IMG[frame_number][i] : Mn);
-							}
 						}
 					}
 			} else {
@@ -75,8 +67,10 @@ void Frametransfer(void){
 			{
 				rawIMG[Y][X-2] = IMG[Y][X];
 			}
-	//img2RGB(rawIMG,imgRGB);
+			
+			free((void *)FrmPackt);
 }
+
 
 //void Frametransfer(void){
 //	uint8_t i,X,Y;

@@ -36,6 +36,8 @@ lepton-new\lepton_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_e
 lepton-new\lepton_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 lepton-new\lepton_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 lepton-new\lepton_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+lepton-new\lepton_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+lepton-new\lepton_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lepton-new\lepton_i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 lepton-new\lepton_i2c.o: ..\tl1771\inc\tl1771_driver.h
 lepton-new\lepton_i2c.o: ..\tl1771\inc\config.h

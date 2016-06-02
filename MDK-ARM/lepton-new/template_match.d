@@ -32,5 +32,7 @@ lepton-new\template_match.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i
 lepton-new\template_match.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 lepton-new\template_match.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 lepton-new\template_match.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+lepton-new\template_match.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+lepton-new\template_match.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lepton-new\template_match.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 lepton-new\template_match.o: ..\tl1771\inc\config.h

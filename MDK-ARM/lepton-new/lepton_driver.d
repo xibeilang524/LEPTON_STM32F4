@@ -30,8 +30,11 @@ lepton-new\lepton_driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2
 lepton-new\lepton_driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 lepton-new\lepton_driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 lepton-new\lepton_driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+lepton-new\lepton_driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+lepton-new\lepton_driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 lepton-new\lepton_driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 lepton-new\lepton_driver.o: ..\lepton\Inc\lepton_driver.h
 lepton-new\lepton_driver.o: ..\tl1771\inc\TL1771_Driver.h
 lepton-new\lepton_driver.o: ..\tl1771\inc\config.h
 lepton-new\lepton_driver.o: ..\image_process\inc\img_process.h
+lepton-new\lepton_driver.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

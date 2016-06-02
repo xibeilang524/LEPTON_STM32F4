@@ -36,10 +36,15 @@
 #include "stm32f4xx_it.h"
 
 /* USER CODE BEGIN 0 */
+#include "TL1771_Driver.h"
+#include "lepton_driver.h"
+
+extern uint16_t rawIMG[80][80];
 
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern TIM_HandleTypeDef htim7;
 
 /******************************************************************************/
 /*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
@@ -161,7 +166,28 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
 
-/* USER CODE BEGIN 1 */
+/**
+* @brief This function handles TIM7 global interrupt.
+*/
+void TIM7_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM7_IRQn 0 */
 
+  /* USER CODE END TIM7_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim7);
+  /* USER CODE BEGIN TIM7_IRQn 1 */
+
+  /* USER CODE END TIM7_IRQn 1 */
+}
+
+/* USER CODE BEGIN 1 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	uint8_t X,Y;
+	printf("Hello\r\n");
+	
+	//Frametransfer();
+						
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

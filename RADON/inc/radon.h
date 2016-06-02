@@ -15,8 +15,8 @@ typedef struct {
 }LINE;
 
 void radon(float *pPtr, float *iPtr, const uint8_t *thetaPtr, int M, int N, int xOrigin, int yOrigin, int numAngles, int rFirst, int rSize);
-POINT* max(unsigned char str[][181]);
-LINE* radonLine(float str[103*181]);
+//POINT* max(unsigned char str[][91]);
+LINE* radonLine(float str[103*46]);
 //POINT min(unsigned char str[][91]);
 
 #endif // !__Radon_H

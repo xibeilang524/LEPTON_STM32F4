@@ -332,7 +332,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F415xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Include;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;..\image_process\inc;..\lepton\Inc;..\lepton_sdk\Inc;..\RADON\inc;..\tl1771\inc</IncludePath>
+              <IncludePath>../Inc;            ../Drivers/STM32F4xx_HAL_Driver/Inc;            ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;            ../Drivers/CMSIS/Include;            ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;            ..\image_process\inc;            ..\lepton\Inc;            ..\lepton_sdk\Inc;            ..\RADON\inc;            ..\tl1771\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -606,9 +606,6 @@
               <FilePath>..\tl1771\src\TL1771_Driver.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>New Group</GroupName>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>

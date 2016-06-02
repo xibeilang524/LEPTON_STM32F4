@@ -56,6 +56,8 @@ I2C_HandleTypeDef hi2c2;
 
 SPI_HandleTypeDef hspi1;
 
+TIM_HandleTypeDef htim7;
+
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
@@ -133,6 +135,7 @@ static void MX_GPIO_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_TIM7_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -148,14 +151,13 @@ int fputc(int ch,FILE *p)
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
 uint16_t rawIMG[80][80];
 LEP_CAMERA_PORT_DESC_T hport_desc;
 
 /////////////////radon transform////////////////
-float radonRawOut[103*181];
+float radonRawOut[103*46];
 float radonRawIn[4800];
-const uint8_t theta[181] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180};
+const uint8_t theta[46]={0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,92,96,100,104,108,112,116,120,124,128,132,136,140,144,148,152,156,160,164,168,172,176,180};
 LINE line1,line2;
 float k1,k2,b1,b2;
 float y1[80],y2[80];
@@ -191,6 +193,7 @@ int main(void)
   MX_I2C2_Init();
   MX_SPI1_Init();
   MX_USART1_UART_Init();
+  MX_TIM7_Init();
 
   /* USER CODE BEGIN 2 */
 
@@ -207,24 +210,23 @@ int main(void)
 	LCD_Clear(BLACK);
 
 	LCD_SetWindos(0,154,127,159);
-	printf("SYSTEM STANDBY!\r\n");
 		
 	hport_desc.deviceAddress=0x2A;
 	hport_desc.portBaudRate=100;
 	hport_desc.portID = 0;
 	
-	HAL_Delay(1000);
+	HAL_Delay(500);
 
 	reg=LEP_I2C_STATUS_REG;
 	data[0] = (reg >> 8 & 0xff);
 	data[1] = (reg & 0xff);
-	printf("HAL Status:%c\r\n",HAL_I2C_Mem_Read(&hi2c2,0x2A<<1,LEP_I2C_STATUS_REG,2,data,2,1000));
-	printf("Status Reg:%x\r\n",data[0]<<8 | (data[1]));	
 
 	init_lepton_command_interface();
 	enable_lepton_agc();
   
-	printf("Init finish!\r\n");	
+	HAL_Delay(500);
+	//启动定时器
+	//HAL_TIM_Base_Start_IT(&htim7);
 	
   while (1)
   {
@@ -232,104 +234,92 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 		
-		HAL_Delay(1);
-		
-		
 		Frametransfer();
-		
-						
+								
 		LCD_SetWindos(0,81,80,160);
 		for(Y=0;Y<60;Y++)
 			for(X=0;X<80;X++)
 			{
 				LCD_Write_Data(TermoClr(rawIMG[Y][X],0,65535));
-				//LCD_Write_Data(rawIMG[Y][X]>0?WHITE:BLACK);
 			}
 			
-//		binimg(rawIMG,48000);
-//			
 //			////////////////radon transform/////////////
-//			for(i = 0;i < 60; i++)
-//				for(j = 0; j < 80; j++)
-//				{
-//					srcbin[i][j] = imageT1[i][j];
-//					radonRawIn[i*80+j] = srcbin[i][j];
-//				}
+			for(i = 0;i < 60; i++)
+				for(j = 0; j < 80; j++)
+				{
+						srcbin[i][j] = imageT1[i][j];
+						//srcbin[i][j] = rawIMG[i][j]>50000?1:0;
+						radonRawIn[i*80+j] = srcbin[i][j];
+				}
 
-//				//3???????陏组
-//			for(i = 0;i < 103*181;i++)
-//				radonRawOut[i] = 0;
+			for(i = 0;i < 103*46;i++)
+				radonRawOut[i] = 0;
 //				
-//			radon(radonRawOut, radonRawIn, theta, 80, 60, 29, 39, 181, -51, 103);
+			//radon(radonRawOut, radonRawIn, theta, 80, 60, 29, 39, 46, -51, 103);
 //				
-//				line1 = radonLine(radonRawOut)[0];
-//				line2 = radonLine(radonRawOut)[1];
-//				
+				line1 = radonLine(radonRawOut)[0];
+				line2 = radonLine(radonRawOut)[1];
+				
 
-//			k1 = line1.k;
-//			b1 = line1.b;
-//			k2 = line2.k;
-//			b2 = line2.b;
-//				
-//				
-//				//////////////////////////////
-//				cross.x = (int)((line2.b - line1.b)/(line1.k - line2.k) + 40);
-//				cross.y = (int)(-line1.k * ((float)cross.x - 40) - line1.b + 30);
-//				
-//				if(line2.theta - line1.theta > 70 && line2.theta - line1.theta < 110)
-//				{					
-//					Cross_point(srcbin,cross.x,cross.y,GREEN);
-//					for (int x = 0; x < 80; x++)
-//					{
-//							y1[x] = -line1.k*((float)x - 40) - line1.b + 30;
-//							y2[x] = -line2.k*((float)x - 40) - line2.b + 30;
+			k1 = line1.k;
+			b1 = line1.b;
+			k2 = line2.k;
+			b2 = line2.b;
+				
+				
+				//////////////////////////////
+				cross.x = (int)((line2.b - line1.b)/(line1.k - line2.k) + 40);
+				cross.y = (int)(-line1.k * ((float)cross.x - 40) - line1.b + 30);
+				
+				if(line2.theta - line1.theta > 70 && line2.theta - line1.theta < 110)
+				{					
+					Cross_point(srcbin,cross.x,cross.y,GREEN);
+					for (int x = 0; x < 80; x++)
+					{
+							y1[x] = -line1.k*((float)x - 40) - line1.b + 30;
+							y2[x] = -line2.k*((float)x - 40) - line2.b + 30;
 
-//							test1_left.x = cross.x - test_dst;
-//							test1_left.y = (int)(y1[test1_left.x]);
-//							test1_right.x = cross.x + test_dst;
-//							test1_right.y = (int)(y1[test1_right.x]);
+							test1_left.x = cross.x - test_dst;
+							test1_left.y = (int)(y1[test1_left.x]);
+							test1_right.x = cross.x + test_dst;
+							test1_right.y = (int)(y1[test1_right.x]);
 
-//							test2_left.x = cross.x - test_dst;
-//							test2_left.y = (int)(y2[test2_left.x]);
-//							test2_right.x = cross.x + test_dst;
-//							test2_right.y = (int)(y2[test2_right.x]);
+							test2_left.x = cross.x - test_dst;
+							test2_left.y = (int)(y2[test2_left.x]);
+							test2_right.x = cross.x + test_dst;
+							test2_right.y = (int)(y2[test2_right.x]);
 
-//							
-//							if (srcbin[test1_left.y][test1_left.x] >= 1 && srcbin[test1_right.y][test1_right.x] >= 1)	
-//							{
-//								if (srcbin[test2_left.y][test2_left.x] >= 1)	
-//								{
-//									Cross_point(srcbin,test2_left.x,test2_left.y,RED);
-//								}
-//								else
-//								{
-//									Cross_point(srcbin,test2_right.x,test2_right.y,RED);
-//								}
-//							}
-//							else if (srcbin[test1_left.y][test1_left.x] >= 1)	
-//							{
-//								Cross_point(srcbin,test1_left.x,test1_left.y,RED);
-//							}
-//							else
-//							{
-//								Cross_point(srcbin,test1_right.x,test1_right.y,RED);
-//							}
-//					}
-//				}
-//	
-//				printf("theta 1 = %f\r\ntheta 2 = %f\r\n\r\n",line1.theta,line2.theta);
-//		
+							
+							if (srcbin[test1_left.y][test1_left.x] >= 1 && srcbin[test1_right.y][test1_right.x] >= 1)	
+							{
+								if (srcbin[test2_left.y][test2_left.x] >= 1)	
+								{
+									Cross_point(srcbin,test2_left.x,test2_left.y,RED);
+								}
+								else
+								{
+									Cross_point(srcbin,test2_right.x,test2_right.y,RED);
+								}
+							}
+							else if (srcbin[test1_left.y][test1_left.x] >= 1)	
+							{
+								Cross_point(srcbin,test1_left.x,test1_left.y,RED);
+							}
+							else
+							{
+								Cross_point(srcbin,test1_right.x,test1_right.y,RED);
+							}
+					}
+				}
 
-//			
-//		LCD_SetWindos(0,0,59,79);			
-//		for(Y=0;Y<60;Y++)
-//			for(X=0;X<80;X++)
-//			{
-//				if(srcbin[Y][X]==1)
-//					LCD_Write_Data(0xFFFF);
-//				else
-//					LCD_Write_Data(srcbin[Y][X]);
-//			}
+			
+		LCD_SetWindos(0,0,59,79);			
+		for(Y=0;Y<60;Y++)
+			for(X=0;X<80;X++)
+			{
+				LCD_Write_Data(srcbin[Y][X]==1?0xFFFF:srcbin[Y][X]);
+			}
+//**************    Radon Transform     *********************//
 
   }
   /* USER CODE END 3 */
@@ -353,7 +343,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 16;
-  RCC_OscInitStruct.PLL.PLLN = 215;
+  RCC_OscInitStruct.PLL.PLLN = 210;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
@@ -406,12 +396,30 @@ void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_HIGH;
   hspi1.Init.CLKPhase = SPI_PHASE_2EDGE;
   hspi1.Init.NSS = SPI_NSS_HARD_OUTPUT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi1.Init.CRCPolynomial = 10;
   HAL_SPI_Init(&hspi1);
+
+}
+
+/* TIM7 init function */
+void MX_TIM7_Init(void)
+{
+
+  TIM_MasterConfigTypeDef sMasterConfig;
+
+  htim7.Instance = TIM7;
+  htim7.Init.Prescaler = 8400;
+  htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim7.Init.Period = 4000;
+  HAL_TIM_Base_Init(&htim7);
+
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  HAL_TIMEx_MasterConfigSynchronization(&htim7, &sMasterConfig);
 
 }
 
