@@ -28,7 +28,7 @@ void radon(float *pPtr, float *iPtr, const uint8_t *thetaPtr, int M, int N, int 
 	/* tables for x*cos(angle) and y*sin(angle) */
 	float x, y;
 	float r;
-	float deg2rad = 3.14159265358979 / 180.0;
+	float deg2rad = 3.1415 / 180.0;
 
 	/* Allocate space for the lookup tables */
 	xCosTable = (float *)calloc(2 * N, sizeof(float));  

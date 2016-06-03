@@ -235,6 +235,7 @@ int main(void)
   /* USER CODE BEGIN 3 */
 		
 		Frametransfer();
+		printf("OK\r\n");
 								
 		LCD_SetWindos(0,81,80,160);
 		for(Y=0;Y<60;Y++)
@@ -255,7 +256,7 @@ int main(void)
 			for(i = 0;i < 103*46;i++)
 				radonRawOut[i] = 0;
 //				
-			//radon(radonRawOut, radonRawIn, theta, 80, 60, 29, 39, 46, -51, 103);
+			radon(radonRawOut, radonRawIn, theta, 80, 60, 29, 39, 46, -51, 103);
 //				
 				line1 = radonLine(radonRawOut)[0];
 				line2 = radonLine(radonRawOut)[1];

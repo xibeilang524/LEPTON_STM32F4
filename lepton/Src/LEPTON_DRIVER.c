@@ -7,7 +7,7 @@
 
 extern uint16_t rawIMG[60][80];
 extern SPI_HandleTypeDef hspi1;
-uint16_t IMG[60][VOSPI_FRAME_SIZE/2];
+static uint16_t IMG[60][VOSPI_FRAME_SIZE/2];
 
 uint16_t RGB565(uint8_t R,uint8_t G,uint8_t B) {
 	return ((R >> 3) << 11) | ((G >> 2) << 5) | (B >> 3);
